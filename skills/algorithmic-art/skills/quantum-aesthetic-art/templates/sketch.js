@@ -3,11 +3,19 @@ const params = {
   width: 900,
   height: 900,
   palette: ["#171614", "#F2E9D8", "#B88A44", "#6D8E87"],
+  backgroundColor: "#171614",
   entityCount: 180,
   fieldScale: 0.008,
   observerInfluence: 0.35,
   evolutionRate: 0.006,
-  backgroundAlpha: 14
+  backgroundAlpha: 14,
+  entityWeightMin: 0.35,
+  entityWeightMax: 1.25,
+  fieldTurns: 2,
+  phaseRate: 0.01,
+  phaseAmplitude: 0.25,
+  observerRange: 0.75,
+  strokeAlpha: 110
 };
 
 let entities = [];
@@ -18,14 +26,13 @@ function initializeSeed(seed) {
 }
 
 function setup() {
-  const canvas = createCanvas(params.width, params.height);
-  canvas.parent("canvas-container");
+  createCanvas(params.width, params.height).parent("canvas-container");
   pixelDensity(1);
   strokeCap(ROUND);
   initializeSeed(params.seed);
   buildSystem();
-  updateSeedReadout();
-  background(params.palette);
+  background(paletteValue(0));
+  announceSeed();
 }
 
 function draw() {
@@ -56,12 +63,16 @@ function renderSystem() {
 
 class Entity {
   constructor(index) {
+    const lowerWeight = min(params.entityWeightMin, params.entityWeightMax);
+    const upperWeight = max(params.entityWeightMin, params.entityWeightMax);
+    const palette = paletteValues();
+
     this.index = index;
     this.position = createVector(random(width), random(height));
     this.previousPosition = this.position.copy();
     this.phase = random(TWO_PI);
-    this.weight = random(0.35, 1.25);
-    this.paletteIndex = floor(random(1, params.palette.length));
+    this.weight = random(lowerWeight, upperWeight);
+    this.paletteIndex = palette.length > 1 ? floor(random(1, palette.length)) : 0;
   }
 
   update() {
@@ -72,30 +83,34 @@ class Entity {
       this.position.y * params.fieldScale,
       frameCount * params.evolutionRate
     );
-
     const observer = createVector(mouseX - this.position.x, mouseY - this.position.y);
     const distanceToObserver = max(observer.mag(), 1);
-    observer.normalize();
+    const maximumInfluence = constrain(params.observerInfluence, 0, 1);
+    const observerRadius = max(width * constrain(params.observerRange, 0, 1), 1);
+
+    if (observer.magSq() > 0) {
+      observer.normalize();
+    }
 
     const observerWeight = constrain(
-      map(distanceToObserver, 0, width * 0.75, params.observerInfluence, 0),
+      map(distanceToObserver, 0, observerRadius, maximumInfluence, 0),
       0,
-      params.observerInfluence
+      maximumInfluence
     );
-
-    const angle = field * TWO_PI * 2 + sin(this.phase + frameCount * 0.01) * 0.25;
+    const angle = field * TWO_PI * params.fieldTurns
+      + sin(this.phase + frameCount * params.phaseRate) * params.phaseAmplitude;
     const direction = p5.Vector.fromAngle(angle).mult(1 - observerWeight);
+
     direction.add(observer.mult(observerWeight));
     direction.setMag(this.weight);
-
     this.position.add(direction);
     this.wrap();
   }
 
   display() {
-    const tone = color(params.palette[this.paletteIndex]);
-    tone.setAlpha(110);
+    const tone = color(paletteValue(this.paletteIndex));
 
+    tone.setAlpha(constrain(params.strokeAlpha, 0, 255));
     stroke(tone);
     strokeWeight(this.weight);
     line(
@@ -114,9 +129,27 @@ class Entity {
   }
 }
 
+function paletteValues() {
+  if (Array.isArray(params.palette) && params.palette.length > 0) {
+    return params.palette;
+  }
+
+  return [params.backgroundColor];
+}
+
+function paletteValue(index) {
+  const palette = paletteValues();
+  const requestedIndex = Number.isFinite(index) ? floor(index) : 0;
+  const safeIndex = constrain(requestedIndex, 0, palette.length - 1);
+
+  return palette[safeIndex] || params.backgroundColor;
+}
+
 function fadeBackground(opacity) {
-  const base = color(params.palette);
-  base.setAlpha(opacity);
+  const base = color(paletteValue(0));
+  const safeOpacity = Number.isFinite(opacity) ? opacity : 0;
+
+  base.setAlpha(constrain(safeOpacity, 0, 255));
   noStroke();
   fill(base);
   rect(0, 0, width, height);
@@ -130,11 +163,16 @@ function updateSeedReadout() {
   }
 }
 
+function announceSeed() {
+  updateSeedReadout();
+  console.info(`Quantum Aesthetic seed: ${params.seed}`);
+}
+
 function regenerate() {
   initializeSeed(params.seed);
-  background(params.palette);
+  background(paletteValue(0));
   buildSystem();
-  updateSeedReadout();
+  announceSeed();
 }
 
 function exportImage() {
