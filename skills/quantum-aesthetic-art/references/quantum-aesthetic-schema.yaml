@@ -1,0 +1,80 @@
+schema_version: "1.0"
+
+artwork:
+  id: "quantum-aesthetic-0001"
+  title: "Untitled Quantum Aesthetic Work"
+  created_at: "2026-08-08"
+  creator: "So Hashiguchi"
+  medium: "p5.js generative art"
+  license: "Specify a license"
+
+reproducibility:
+  seed: 12345
+  canvas:
+    width: 900
+    height: 900
+    pixel_density: 1
+  runtime:
+    library: "p5.js"
+    library_version: "1.11.3"
+  entry_points:
+    viewer: "viewer.html"
+    source: "sketch.js"
+
+parameters:
+  palette:
+    - "#171614"
+    - "#F2E9D8"
+    - "#B88A44"
+    - "#6D8E87"
+  background_color: "#171614"
+  entity_count: 180
+  field_scale: 0.008
+  observer_influence: 0.35
+  evolution_rate: 0.006
+  background_alpha: 14
+  entity_weight_min: 0.35
+  entity_weight_max: 1.25
+  field_turns: 2
+  phase_rate: 0.01
+  phase_amplitude: 0.25
+  observer_range: 0.75
+  stroke_alpha: 110
+
+quantum_aesthetic:
+  states:
+    - id: "longing"
+      label: "幸福への憧れ"
+      description: "A field that continually approaches, but never fixes, a luminous state."
+    - id: "conflict"
+      label: "敵対する勢力"
+      description: "Competing directional forces that interrupt local harmony."
+    - id: "transcendence"
+      label: "歓喜の歌"
+      description: "A temporary convergence into expanded rhythm and openness."
+
+  superposition_equation: |
+    |psi> = alpha|longing> + beta|conflict> + gamma|transcendence>
+    where |alpha|^2 + |beta|^2 + |gamma|^2 = 1
+
+  observer_protocol:
+    input: "pointer position and keyboard commands"
+    effect: "The observer biases local field direction and may collapse latent visual branches."
+    regeneration_key: "R"
+    export_key: "S"
+
+conceptual_provenance:
+  methodology:
+    - "CoPhelia³ protocol"
+    - "Quantum aesthetics"
+    - "Aesthetic trust"
+    - "Emergent dialogue"
+  uncertainty_principle:
+    formula: "delta_beauty * delta_meaning >= hbar_aesthetic / 2"
+    interpretation: "The work keeps beauty and meaning partially indeterminate."
+
+integrity:
+  source_hash: "Optional SHA-256 of sketch.js"
+  repository_url: "Optional HTTPS repository URL"
+  commit: "Optional Git commit SHA"
+  notes: "Record changes that affect reproducibility."
