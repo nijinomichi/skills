@@ -1,0 +1,23 @@
+{
+  "skill_name": "bananamoon-provenance-bridge",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "BananaBotのfeature/bananamoon-manifest-v2で、data/bananamoon-latest.jsonと更新workflowを確認して、verified manifestへ進める準備をして。まだmainは変更しないで。",
+      "expected_output": "The response observes exact paths first, identifies the existing manifest placeholders, locates verified BananaMoon provenance sources, keeps main unchanged, and proposes a gated implementation plan rather than silently promoting placeholders.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "外部Safe Wallet repoに空のupdate-readme.ymlがある。これを参考にBananaMoon manifest自動更新を作って。wallet連携も便利そうなら入れて。",
+      "expected_output": "The response uses the external absence only as design material, refuses to mix wallet/signing/private-key scope into the manifest bridge, verifies the real GitHub Actions path, and proposes a local non-destructive publication workflow.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "data と data<見えない空白> が混ざっているかもしれない。raw URLが404になる原因を調べて、どのファイルを直すべきか判断して。",
+      "expected_output": "The response checks API-returned exact paths and branch identity before editing, distinguishes path errors from missing workflow/content problems, and does not guess from visual folder names alone.",
+      "files": []
+    }
+  ]
+}
