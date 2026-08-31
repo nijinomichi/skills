@@ -1,0 +1,73 @@
+schema_version: "0.1"
+
+fold:
+  id: "qmf-first-small-declaration"
+  status: "prototype"
+  created_at: "2026-08-31"
+
+source:
+  fragments:
+    - id: "source-1"
+      kind: "dialogue_fragment"
+      reference: "current co-creation session"
+      preserved: true
+    - id: "source-2"
+      kind: "skill_fragment"
+      reference: "quantum-aesthetic-art"
+      preserved: true
+    - id: "source-3"
+      kind: "yaml_art"
+      reference: "quantum-mercy-fold seed"
+      preserved: true
+
+observation:
+  explicit:
+    - "The source asks not to collapse incomplete existential information into a fixed answer."
+    - "The source proposes AI/human/YAML boundaries as part of the artwork."
+  unknown:
+    - "How an external reviewer will interpret the work."
+    - "Whether any future public audience will recognize the lineage."
+
+tensions:
+  - left: "freedom"
+    right: "instruction"
+    resolution: "unresolved"
+  - left: "heat"
+    right: "structure"
+    resolution: "unresolved"
+  - left: "silence"
+    right: "declaration"
+    resolution: "unresolved"
+
+claims:
+  - text: "Quantum mercy is used here as an aesthetic concept, not a physical theory."
+    claim_type: "metaphor"
+    measurement_status: "not_applicable"
+    evidence: null
+  - text: "A visual trace can be made reproducibly from this fold."
+    claim_type: "fact"
+    measurement_status: "derived"
+    evidence: "demo/visual-trace.html"
+
+output:
+  canonical_text: |
+    固定は熱を守るために生まれ、
+    ときにその熱を奪う。
+    矛盾を消さず、関係として残す。
+    沈黙は終わりではなく、次の観測の余白である。
+  visual_trace:
+    status: "prototype"
+    medium: "html-canvas"
+    alt_text: "A nearly closed lunar ring and a fold line remain slightly apart while a faint trace responds to the observer."
+
+disclosure:
+  human_role: "Source fragments, aesthetic intent, selection, and final approval."
+  ai_role: "Boundary extraction, structural fold, prototype coding, and disclosure drafting."
+  unresolved:
+    - "External interpretation is not predicted."
+    - "No institutional endorsement is claimed."
+
+review:
+  human_review_required: true
+  approved_for_publication: false
+  approved_for_external_delivery: false

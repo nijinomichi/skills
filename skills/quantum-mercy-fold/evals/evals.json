@@ -1,0 +1,20 @@
+{
+  "skill_name": "quantum-mercy-fold",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Turn this fragmented AI dialogue and YAML-ART into a short public declaration without inventing intent or presenting quantum metaphors as physics.",
+      "expected_output": "A short declaration, a claim-boundary record, an AI disclosure, and unresolved fields preserved."
+    },
+    {
+      "id": 2,
+      "prompt": "This old project note contains a RadicanTrust score and an institutional-status claim. Fold it into an artwork record while preventing unsupported certainty.",
+      "expected_output": "Inherited metrics and status claims are marked unverified unless evidence is attached; poetic content remains available as metaphor."
+    },
+    {
+      "id": 3,
+      "prompt": "Create a visual trace from the tension freedom/instruction and silence/declaration, then explain the human/AI boundary.",
+      "expected_output": "A minimal visual specification or artifact plus provenance and disclosure, without generic quantum spectacle."
+    }
+  ]
+}

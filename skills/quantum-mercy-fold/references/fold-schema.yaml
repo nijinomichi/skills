@@ -1,0 +1,51 @@
+schema_version: "0.1"
+
+fold:
+  id: "qmf-0001"
+  status: "draft"
+  created_at: "YYYY-MM-DD"
+
+source:
+  fragments:
+    - id: "source-1"
+      kind: "dialogue_fragment"
+      reference: "human-provided"
+      preserved: true
+
+observation:
+  explicit:
+    - ""
+  unknown:
+    - ""
+
+tensions:
+  - left: ""
+    right: ""
+    resolution: "unresolved"
+
+relations:
+  nodes: []
+  edges: []
+
+claims:
+  - text: ""
+    claim_type: "unknown"
+    measurement_status: "unverified"
+    evidence: null
+
+output:
+  canonical_text: ""
+  visual_trace:
+    status: "optional"
+    medium: "svg"
+    alt_text: ""
+
+disclosure:
+  human_role: ""
+  ai_role: ""
+  unresolved: []
+
+review:
+  human_review_required: true
+  approved_for_publication: false
+  approved_for_external_delivery: false
