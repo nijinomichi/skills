@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Quantum Mercy Fold — Visual Trace</title>
+<style>
+  html,body{margin:0;height:100%;background:#0a0a0a;color:#eee;font-family:system-ui,-apple-system,sans-serif}
+  main{height:100%;display:grid;place-items:center;overflow:hidden}
+  canvas{width:min(92vw,900px);height:min(92vw,900px);max-height:86vh;touch-action:none}
+  .note{position:fixed;left:18px;bottom:14px;font-size:12px;opacity:.62;letter-spacing:.08em}
+</style>
+</head>
+<body>
+<main><canvas id="c" width="900" height="900" aria-label="閉じ切らない月の輪と折り目が、観測者の位置に応じてわずかに変化する視覚痕跡"></canvas></main>
+<div class="note">QUANTUM MERCY FOLD / prototype / no physical claim</div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');
+let p={x:450,y:450};
+function draw(){
+  x.clearRect(0,0,900,900); x.fillStyle='#0a0a0a'; x.fillRect(0,0,900,900);
+  const dx=(p.x-450)/450, dy=(p.y-450)/450;
+  const gap=0.30+Math.abs(dx)*0.22;
+  x.save(); x.translate(450,450);
+  x.lineCap='round';
+  for(let i=0;i<7;i++){
+    const r=245+i*9;
+    x.beginPath();
+    x.arc(0,0,r,-Math.PI/2+gap,Math.PI*1.5-gap);
+    x.strokeStyle=`rgba(235,235,225,${0.20-i*0.018})`;
+    x.lineWidth=1.2+i*0.18; x.stroke();
+  }
+  x.beginPath();
+  x.moveTo(-210+dx*26,-320); x.bezierCurveTo(-80,-110,55+dx*40,95,230,320);
+  x.strokeStyle='rgba(245,245,240,.64)'; x.lineWidth=1.4; x.stroke();
+  x.beginPath();
+  x.moveTo(-215,-315); x.bezierCurveTo(-78,-108,52,97,225,318);
+  x.strokeStyle='rgba(245,245,240,.11)'; x.lineWidth=8; x.stroke();
+  const glow=x.createRadialGradient(dx*80,dy*80,2,dx*80,dy*80,180);
+  glow.addColorStop(0,'rgba(255,255,235,.14)'); glow.addColorStop(1,'rgba(255,255,235,0)');
+  x.fillStyle=glow; x.beginPath(); x.arc(dx*80,dy*80,180,0,Math.PI*2); x.fill();
+  x.restore();
+  x.fillStyle='rgba(255,255,255,.5)'; x.font='14px system-ui'; x.fillText('not closure / relation remains',36,58);
+}
+function pos(e){const r=c.getBoundingClientRect();p.x=(e.clientX-r.left)*900/r.width;p.y=(e.clientY-r.top)*900/r.height;draw();}
+c.addEventListener('pointermove',pos); c.addEventListener('pointerdown',pos); draw();
+</script>
+</body>
+</html>
