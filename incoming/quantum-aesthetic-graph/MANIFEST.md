@@ -6,7 +6,7 @@ Storage status in this PR: staged as an incoming ZIP for review, not yet promote
 
 ## Archive
 
-- Path: `incoming/quantum-aesthetic-graph-2.zip`
+- Path: `incoming/quantum-aesthetic-graph/quantum-aesthetic-graph-2.zip`
 - Size: `10431` bytes
 - SHA-256: `e7aafeb80cb98c161f45abd2fb0c7b8fbe55475bd198b383958bc44b3d4f3e91`
 
